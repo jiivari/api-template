@@ -31,3 +31,26 @@ Use
 3. save file
 4. start the service with command "npm start"
 5. open browser and type in address "http://localhost:3000/api/oauthget" or use POSTMAN with method GET to same uri.
+
+**/api/simplepost**
+POST method to invoke ibm personality insights api. Personality insights use basic authentication.
+
+Method requires json payload as input.
+
+{"contentItems":[{
+  "content":"testString",
+  "contenttype":"text/plain",
+  "language":"en",
+  "created":1505653346000}
+]}
+
+**Note: Minumun number of words required for analysis is 100.**
+
+Use
+1. check index.js for /api/simplepost
+2. replace [USERNAME], [PASSWORD] with your credentials.
+3. save file
+4. start the service with command "npm start"
+5. Use POSTMAN with method POST to same http://localhost:3000/api/simplepost
+  
+
