@@ -10,7 +10,7 @@ var port = 3000;
 app.get('/api/simpleget', function(req,res) {
 
   //simple get method with access_token or api_key in the uri
-  var apikey = '123'; //accesstoken is used in the uri variable
+  var apikey = '[APIKEY]'; //accesstoken is used in the uri variable
   var uri = 'https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify?api_key='+apikey+'&url=https://watson-developer-cloud.github.io/doc-tutorial-downloads/visual-recognition/fruitbowl.jpg&version=2016-05-20';
 
   var options = {
