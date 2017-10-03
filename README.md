@@ -10,7 +10,7 @@ Requires GIT tools (https://git-scm.com/downloads)
 3. run "npm install" command on api-template folder to install depencies
 
 
-**There is 3 different endpoints to test some external API.**
+**There is 4 different endpoints to test some external API.**
 
 **/api/simpleget**
 simple GET method to invoke **ibm visual-recognition** api. Requires api_key from IBM Bluemix.
@@ -53,4 +53,18 @@ Use
 4. start the service with command "npm start"
 5. Use POSTMAN with method POST to same http://localhost:3000/api/simplepost
   
+
+**/api/analysetweets**
+GET method to search tweets and POST data to Watson Personality Insights. Returns JSON.
+API uses 2 different API's and "promises" (an alternative for callback). https://www.promisejs.org/
+
+Use
+1. check index.js for /api/analysetweets
+2. replace [CONSUMERKEY], [CONSUMERSECRET], [TOKEN] and [TOKENSECRET] with your keys.
+3. replace [USERNAME], [PASSWORD] with your credentials.
+4. replace "realDonaldTrump" with some other twitter handle.
+5. save file
+6. start the service with command "npm start"
+7. Use POSTMAN with method GET to same http://localhost:3000/api/analysetweets
+
 
