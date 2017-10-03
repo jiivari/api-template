@@ -111,5 +111,103 @@ app.post('/api/simplepost', function(req,res) {
 });
 // POST method ends here <--
 
+
+// GET method with analysetweets starts here -->
+app.get('/api/analysetweets', function(req,res) {
+
+  const twitterMessage = function() {
+    querystring = 'from:realDonaldTrump';
+    var uri = 'https://api.twitter.com/1.1/search/tweets.json?q=' + qs.escape(querystring) + '&count=100';
+
+    // get oauth keys from service
+    var options = {
+      method: 'GET',
+      uri: uri,
+      oauth: {
+        consumer_key: '[CONSUMERKEY]',
+        consumer_secret: '[CONSUMERSECRET]',
+        token: '[TOKEN]',
+        token_secret: '[TOKENSECRET]'
+      }
+    };
+
+    return new Promise(function(resolve, reject) {
+      request(options,function(error, response, body) {
+
+        if (error) {
+          message = error.message;
+        } else {
+          jsonContent = JSON.parse(body);
+          var returnJson = {};
+          var key = 'contentItems';
+          returnJson[key] = [];
+          var returnRaw = false;
+          var data = {};
+
+          for (var index in jsonContent.statuses){
+            if (jsonContent.statuses[index].text == null) {
+              data = {};
+            } else {
+              data = {
+                'content': jsonContent.statuses[index].text,
+                'contenttype': 'text/plain',
+                'language': 'en',
+                'created': Date.parse(jsonContent.statuses[index].created_at)
+              }
+            }
+            returnJson[key].push(data);
+          }
+
+          if (returnRaw == true) {
+            message = JSON.stringify(jsonContent)
+          } else {
+            message = JSON.stringify(returnJson);
+          }
+        }
+        console.log(message);
+        resolve(message)
+      });
+    });
+  };
+
+  const personalityinsights = function(tweets) {
+    var username = '[USERNAME]';
+    var password = '[PASSWORD]';
+    uri = 'https://gateway-a.watsonplatform.net/personality-insights/api/v3/profile?version=2016-10-20&consumption_preferences=true&raw_scores=true';
+
+    var options = {
+      'method': 'POST',
+      'uri': uri,
+      'headers': {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + new Buffer(username + ':' + password).toString('base64')
+      },
+      'body': tweets
+    };
+    console.log(options);
+    return new Promise(function(resolve, reject) {
+      request(options,function(error, response, body) {
+        if (error) {
+          resolve(error.message)
+        } else {
+          jsonContent = JSON.parse(body);
+          message = JSON.stringify(jsonContent);
+        }
+        resolve(message)
+      });
+    });
+  };
+
+
+  twitterMessage().then(personalityinsights).then(respond => {
+    res.type('application/json');
+    res.set('Content-Length', Buffer.byteLength(respond));
+    res.status(200).send(respond);
+  });
+
+
+});
+// GET method with analysetweets ends here <--
+
 console.log('Listening on ' + port);
 app.listen(process.env.PORT || port);
