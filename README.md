@@ -20,7 +20,8 @@ Use
 2. replace [APIKEY] with your api_key variable.
 3. save file
 4. start the service with command "npm start"
-5. open browser and type in address "http://localhost:3000/api/simpleget" or use POSTMAN with method GET to same uri.
+5. Check the "uri" for correct watson gateway "gateway-a" or something else depending on your bluemix platform...
+6. open browser and type in address "http://localhost:3000/api/simpleget" or use POSTMAN with method GET to same uri.
 
 **/api/oauthget**
 GET method to invoke twitter api with OAuth authentication. Requires Oauth Authentication key from Twitter. (https://developer.twitter.com)
@@ -51,7 +52,8 @@ Use
 2. replace [USERNAME], [PASSWORD] with your credentials.
 3. save file
 4. start the service with command "npm start"
-5. Use POSTMAN with method POST to same http://localhost:3000/api/simplepost
+5. Check the "uri" for correct watson gateway "gateway-a" or something else depending on your bluemix platform...
+6. Use POSTMAN with method POST to same http://localhost:3000/api/simplepost
   
 
 **/api/analysetweets**
@@ -63,8 +65,9 @@ Use
 2. replace [CONSUMERKEY], [CONSUMERSECRET], [TOKEN] and [TOKENSECRET] with your keys.
 3. replace [USERNAME], [PASSWORD] with your credentials.
 4. replace "realDonaldTrump" with some other twitter handle.
-5. save file
-6. start the service with command "npm start"
-7. Use POSTMAN with method GET to same http://localhost:3000/api/analysetweets
+5. Check the "uri" for correct watson gateway "gateway-a" or something else depending on your bluemix platform...
+6. save file
+7. start the service with command "npm start"
+8. Use POSTMAN with method GET to same http://localhost:3000/api/analysetweets
 
 
